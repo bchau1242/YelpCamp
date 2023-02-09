@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
-const ExpressError = require('../utils/ExpressError');
-const Campground = require('../models/campground');
 const { campgroundSchema } = require('../schemas');
 const { isLoggedIn } = require('../middleware');
+
+const ExpressError = require('../utils/ExpressError');
+const Campground = require('../models/campground');
 
 const validateCampground = (req, res, next) => {
   const { error } = campgroundSchema.validate(req.body);
@@ -33,9 +34,9 @@ router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, nex
   res.redirect(`/campgrounds/${campground.id}`)
 }))
 
-router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {
+router.get('/:id', catchAsync(async (req, res) => {
   const campground = await Campground.findById(req.params.id).populate('reviews');
-  if(!campground) {
+  if (!campground) {
     req.flash('error', 'Cannot find that campground!');
     res.redirect('/campgrounds');
   }
@@ -44,7 +45,7 @@ router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
   const campground = await Campground.findById(req.params.id);
-  if(!campground) {
+  if (!campground) {
     req.flash('error', 'Cannot find that campground!');
     res.redirect('/campgrounds');
   }
