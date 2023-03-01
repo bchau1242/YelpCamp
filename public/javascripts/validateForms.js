@@ -1,5 +1,3 @@
-const { bulkSave } = require("../../models/review")
-
 (() => {
   'use strict'
 
