@@ -13,8 +13,6 @@ map.on('load', () => {
   // add the point_count property to your source data.
   map.addSource('campgrounds', {
     type: 'geojson',
-    // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-    // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
     data: campgrounds,
     cluster: true,
     clusterMaxZoom: 14, // Max zoom to cluster points on
@@ -65,6 +63,7 @@ map.on('load', () => {
     }
   });
 
+  
   map.addLayer({
     id: 'unclustered-point',
     type: 'circle',
@@ -125,3 +124,6 @@ map.on('load', () => {
     map.getCanvas().style.cursor = '';
   });
 });
+
+map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.FullscreenControl());
