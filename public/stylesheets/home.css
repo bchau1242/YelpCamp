@@ -28,11 +28,14 @@ body {
 .nav-link.active {
   color: white;
   border-bottom-color: white;
-
 }
 
-.btn-secondary,
-.btn-secondary:hover {
+.btn-secondary {
   color: #333;
+  text-shadow: none;
+}
+
+#home-btn-campgrounds:hover {
+  color: green;
   text-shadow: none;
 }
